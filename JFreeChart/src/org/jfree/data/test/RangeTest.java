@@ -9,14 +9,15 @@ public class RangeTest {
 
 
     @Before
-    public void setUp() throws Exception { exampleRange = new Range(-1, 1);
+    public void setUp() throws Exception { 
+    	exampleRange = new Range(-1, 1);
     }
 
 
     @Test
-    public void centralValueShouldBeZero() {
-        assertEquals("The central value of -1 and 1 should be 0",
-        0, exampleRange.getCentralValue(), .000000001d);
+    public void lengthShouldBeTwo() {
+        assertEquals("The length of Range from -1 to 1 should be 2",
+        2, exampleRange.getLength(), .000000001d);
     }
 
     @After
