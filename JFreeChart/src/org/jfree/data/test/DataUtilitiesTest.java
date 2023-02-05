@@ -31,6 +31,10 @@ public class DataUtilitiesTest {
 	             will(returnValue(7.5));
 	             one(values).getValue(1, 0);
 	             will(returnValue(2.5));
+	             one(values).getValue(0, 10);;
+	             will(returnValue(0));
+	             one(values).getValue(1, 10);;
+	             will(returnValue(0));
 	         }
     	 });
     }
@@ -38,14 +42,14 @@ public class DataUtilitiesTest {
 	 @Test
 	 public void calculateColumnTotalForTwoValues() {
 	     double result = DataUtilities.calculateColumnTotal(values, 0);
-	     assertEquals(result, 10.0, .000000001d);
+	     assertEquals("The total for the column containing 2.5 and 7.5 is 10.0",10.0, result, .000000001d);
 
 	 }
 
-//	 @Test
-//	 public void invalidParameterExceptionIsThrown() {
-//		 exception.expect(InvalidParameterException.class);
-//		 DataUtilities.calculateColumnTotal(values, 10);
-//	 }
+	 @Test
+	 public void calculateColumnTotalReturnsZeroForInvalidValue() {
+		 double result = DataUtilities.calculateColumnTotal(values, 10);
+		 assertEquals(0, result, .000000001d);
+	 }
 
 }

@@ -4,7 +4,7 @@ import static org.junit.Assert.*; import org.jfree.data.Range; import org.junit.
 
 public class RangeTest {
     private Range exampleRange;
-    private Range nullRange;
+
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
@@ -12,7 +12,6 @@ public class RangeTest {
     @Before
     public void setUp() throws Exception { 
     	exampleRange = new Range(-1, 1);
-    	nullRange = null;
     }
 
 
