@@ -61,6 +61,10 @@ public class DataUtilitiesTest {
 		assertEquals(0, result, .000000001d);
 	}
 
+	/***
+	 * This test will test calculateColumnTotal by using an empty Values2D.
+	 * Expected output is 0.
+	 */
 	@Test
 	public void calculateColumnTotalReturnsZeroForEmptyValue2D() {
 		Mockery mockObject = new Mockery();
@@ -74,7 +78,11 @@ public class DataUtilitiesTest {
 		double result = DataUtilities.calculateColumnTotal(values, 0);
 		assertEquals(0, result, .000000001d);
 	}
-
+	
+	/***
+	 * This test will test calculateRowTotal by using a properly made Values2D.
+	 * Expected output is 10.
+	 */
 	@Test
 	public void calculateRowTotalForTwoValues() {
 		Mockery mockObject = new Mockery();
@@ -90,9 +98,13 @@ public class DataUtilitiesTest {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals("The total for the row containing 2.5 and 7.5 is 10.0", 7.5, result, .000000001d);
+		assertEquals("The total for the row containing 2.5 and 7.5 is 10.0", 10, result, .000000001d);
 	}
 
+	/***
+	 * This test will test calculateRowTotal by using a properly made Values2D with invalid inputs.
+	 * Expected output is 0.
+	 */
 	@Test
 	public void calculateRowTotalReturnsZeroForInvalidValue() {
 		Mockery mockObject = new Mockery();
@@ -111,6 +123,10 @@ public class DataUtilitiesTest {
 		assertEquals("The total for the row should be 0 with invalid values", 0, result, .000000001d);
 	}
 
+	/***
+	 * This test will test calculateRowTotal by using an empty Values2D.
+	 * Expected output is 0.
+	 */
 	@Test
 	public void calculateRowTotalReturnsZeroForEmptyValue2D() {
 		Mockery mockObject = new Mockery();
