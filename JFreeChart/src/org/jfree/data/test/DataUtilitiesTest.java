@@ -17,7 +17,7 @@ public class DataUtilitiesTest {
 	Values2D values;
 	KeyedValues keyedValuesList;
 	KeyedValues negativeValuesList;
-	
+
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
 	
@@ -196,8 +196,8 @@ public class DataUtilitiesTest {
 		 assertEquals("The key in index \"0\" is 1", 1, negativeResultValues.getKey(0));
 		 assertEquals("The key in index \"1\" is 2", 2 , negativeResultValues.getKey(1));
 		 assertEquals("The key in index \"2\" is 15", 15, negativeResultValues.getKey(2));
-		 assertEquals("The percentage for index \"0\" is |-5/16| = 0.3125", 0.3125, negativeResultValues.getValue(0).doubleValue(), 0.000000001);
-		 assertEquals("The percentage for index \"1\" is |-5+-9/16| = 0.875 ", 0.875 , negativeResultValues.getValue(1).doubleValue(), 0.000000001);
-		 assertEquals("The percentage for index \"2\" is |-5+-9+-2/16| = 1.0", 1.0, negativeResultValues.getValue(2).doubleValue(), 0.0000000001);
+		 assertEquals("The percentage for index \"0\" is |-5/16| = 0.3125", 0.3125, negativeResultValues.getValue(0).doubleValue(), .000000001d);
+		 assertEquals("The percentage for index \"1\" is |-5+-9/16| = 0.875 ", 0.875 , negativeResultValues.getValue(1).doubleValue(), .000000001d);
+		 assertEquals("The percentage for index \"2\" is |-5+-9+-2/16| = 1.0", 1.0, negativeResultValues.getValue(2).doubleValue(), .000000001d);
 	 }
 }
