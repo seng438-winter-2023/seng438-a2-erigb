@@ -2,8 +2,6 @@ package org.jfree.data.test;
 
 import static org.junit.Assert.*;
 
-import java.security.InvalidParameterException;
-
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Values2D;
 import org.jmock.Expectations;
@@ -99,11 +97,11 @@ public class DataUtilitiesTest {
     	 mockObject.checking(new Expectations() {
     		 {
 	             one(values).getColumnCount();
-	             will(returnValue(2));
+	             will(returnValue(1));
 	             one(values).getValue(0, 0);
-	             will(returnValue(0));
+	             will(returnValue(10));
 	             one(values).getValue(0, 10);
-	             will(returnValue(0));
+	             will(throwException(new IndexOutOfBoundsException("Index 10 is out of bound for Column Count of 1")));
 	         }
     	 });
 	     double result = DataUtilities.calculateRowTotal(values, 0);
