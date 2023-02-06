@@ -61,6 +61,20 @@ public class DataUtilitiesTest {
 	 }
 	 
 	 @Test
+	 public void calculateColumnTotalReturnsZeroForEmptyValue2D() {
+		 Mockery mockObject = new Mockery();
+    	 values = mockObject.mock(Values2D.class);
+    	 mockObject.checking(new Expectations() {
+    		 {
+	             one(values).getRowCount();
+	             will(returnValue(0));
+	         }
+    	 });
+		 double result = DataUtilities.calculateColumnTotal(values, 0);
+		 assertEquals(0, result, .000000001d);
+	 }
+	 
+	 @Test
 	 public void calculateRowTotalForTwoValues() {
 		 Mockery mockObject = new Mockery();
     	 values = mockObject.mock(Values2D.class);
@@ -89,6 +103,20 @@ public class DataUtilitiesTest {
 	             one(values).getValue(0, 0);
 	             will(returnValue(0));
 	             one(values).getValue(0, 10);
+	             will(returnValue(0));
+	         }
+    	 });
+	     double result = DataUtilities.calculateRowTotal(values, 0);
+	     assertEquals("The total for the row should be 0 with invalid values", 0, result, .000000001d);
+	 }
+	 
+	 @Test
+	 public void calculateRowTotalReturnsZeroForEmptyValue2D() {
+		 Mockery mockObject = new Mockery();
+    	 values = mockObject.mock(Values2D.class);
+    	 mockObject.checking(new Expectations() {
+    		 {
+	             one(values).getColumnCount();
 	             will(returnValue(0));
 	         }
     	 });

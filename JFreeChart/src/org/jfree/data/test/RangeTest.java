@@ -35,14 +35,32 @@ public class RangeTest {
     
     
     @Test
-    public void intersectsRangeOverlapsSpecifiedRange() {
-    	assertTrue("The Range intersects the current range (-1, 1). Contains should return true",
+    public void intersectsRangeFullyOverlapsSpecifiedRange() {
+    	assertTrue("The Range (-1, 1) intersects the current range (-1, 1). Contains should return true",
     	exampleRange.intersects(-1, 1));
     }
     
     @Test
-    public void intersectsRangeDoesNotOverlapsSpecifiedRange() {
-    	assertFalse("The Range does not intersects the current range (-1, 1). Contains should return false",
+    public void intersectsRangePartiallyOverlapingSpecifiedRange() {
+    	assertTrue("The Range (-1, 1) intersects the current range (0, 2). Contains should return true",
+    	exampleRange.intersects(0, 2));
+    }
+    
+    @Test
+    public void intersectsRangeFullyCoveredBySpecifiedRange() {
+    	assertTrue("The Range (-1, 1) intersects the current range (0, 1). Contains should return true",
+    	exampleRange.intersects(-5, 5));
+    }
+    
+    @Test
+    public void intersectsSpecifiedRangeFullyCoveredByRange() {
+    	assertTrue("The Range (-1, 1) intersects the current range (0, 1). Contains should return true",
+    	exampleRange.intersects(0, 1));
+    }
+    
+    @Test
+    public void intersectsRangeDoesNotOverlapSpecifiedRange() {
+    	assertFalse("The Range (-1, 1) does not intersects the current range (-1, 1). Contains should return false",
     	exampleRange.intersects(2, 3));
     }
     
