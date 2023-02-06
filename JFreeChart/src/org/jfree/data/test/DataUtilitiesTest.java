@@ -15,7 +15,6 @@ import org.junit.rules.ExpectedException;
 
 public class DataUtilitiesTest {
 	Values2D values;
-	Values2D rowValues;
 	
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();

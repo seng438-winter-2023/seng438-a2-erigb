@@ -4,7 +4,7 @@ import static org.junit.Assert.*; import org.jfree.data.Range; import org.junit.
 
 public class RangeTest {
     private Range exampleRange;
-    private Range nullRange;
+
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
@@ -12,7 +12,6 @@ public class RangeTest {
     @Before
     public void setUp() throws Exception { 
     	exampleRange = new Range(-1, 1);
-    	nullRange = null;
     }
 
 
@@ -45,6 +44,38 @@ public class RangeTest {
     public void intersectsRangeDoesNotOverlapsSpecifiedRange() {
     	assertFalse("The Range does not intersects the current range (-1, 1). Contains should return false",
     	exampleRange.intersects(2, 3));
+    }
+    
+    @Test
+    public void shiftRangeWithoutZeroCrossingPositveDelta() {
+    	Range afterShift = Range.shift(exampleRange, 0.5);
+    	
+    	assertEquals("The lower bound should be 0.5 + -1 = -0.5",
+    	        -0.5, afterShift.getLowerBound(), .000000001d);
+    	assertEquals("The upper bound should be 0.5 + 1 = 1.5",
+    	        1.5, afterShift.getUpperBound(), .000000001d);
+    	
+    }
+    
+    @Test
+    public void shiftRangeWithoutZeroCrossingNegativeDelta() {
+    	Range afterShift = Range.shift(exampleRange, -0.5);
+    	
+    	assertEquals("The lower bound should be -0.5 + -1 = -1.5",
+    	        -1.5, afterShift.getLowerBound(), .000000001d);
+    	assertEquals("The upper bound should be -0.5 + 1 = 0.5",
+    	        0.5, afterShift.getUpperBound(), .000000001d);
+    	
+    }
+
+    @Test
+    public void shiftShouldNotAllowZeroCrossing() {
+    	Range afterShift = Range.shift(exampleRange, 5.0);
+    	assertEquals("The upper bound should be 5.0 + 1 = 6.0",
+    	        6.0, afterShift.getUpperBound(), .000000001d);
+    	assertEquals("The lower bound should be 0 since no zero crossing is allowed and -1 + 5 = 4 > 0",
+    	        0.0, afterShift.getLowerBound(), .000000001d);
+    	
     }
 
     @After
