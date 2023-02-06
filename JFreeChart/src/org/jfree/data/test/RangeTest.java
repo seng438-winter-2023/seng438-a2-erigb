@@ -88,12 +88,39 @@ public class RangeTest {
 
     @Test
     public void shiftShouldNotAllowZeroCrossing() {
-    	Range afterShift = Range.shift(exampleRange, 5.0);
-    	assertEquals("The upper bound should be 5.0 + 1 = 6.0",
-    	        6.0, afterShift.getUpperBound(), .000000001d);
-    	assertEquals("The lower bound should be 0 since no zero crossing is allowed and -1 + 5 = 4 > 0",
-    	        0.0, afterShift.getLowerBound(), .000000001d);
-    	
+        Range afterShift = Range.shift(exampleRange, 5.0);
+        assertEquals("The upper bound should be 5.0 + 1 = 6.0",
+                6.0, afterShift.getUpperBound(), .000000001d);
+        assertEquals("The lower bound should be 0 since no zero crossing is allowed and -1 + 5 = 4 > 0",
+                0.0, afterShift.getLowerBound(), .000000001d);
+
+    }
+    
+    @Test
+    public void expandToIncludeWithinRange() {
+    	Range actual = Range.expandToInclude(exampleRange, 0.8);
+    	assertEquals("The upper bound should be [-1, 1].",
+    			1, actual.getUpperBound(), .000000001d);
+    	assertEquals("The lower bound should be [-1, 1].",
+    			-1, actual.getLowerBound(), .000000001d);
+    }
+    
+    @Test
+    public void expandToIncludeOutsideUpperRange() {
+    	Range actual = Range.expandToInclude(exampleRange, 1.5);
+    	assertEquals("The upper bound should be [-1, 1.01].",
+    			1.01, actual.getUpperBound(), .000000001d);
+    	assertEquals("The lower bound should be [-1, 1.01].",
+    			-1, actual.getLowerBound(), .000000001d);
+    }
+    
+    @Test
+    public void expandToIncludeOutsideLowerRange() {
+    	Range actual = Range.expandToInclude(exampleRange, -1.5);
+    	assertEquals("The upper bound should be [-1.01, 1].",
+    			1, actual.getUpperBound(), .000000001d);
+    	assertEquals("The lower bound should be [-1.01, 1].",
+    			-1.01, actual.getLowerBound(), .000000001d);
     }
 
     @After
