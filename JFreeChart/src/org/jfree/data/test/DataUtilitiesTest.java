@@ -24,6 +24,10 @@ public class DataUtilitiesTest {
 	public void setUp() throws Exception {
 	}
 
+	/***
+	 * This test will test calculateColumnTotal by using a 1 column, 2 row Values2D object.
+	 * Expected output is 10
+	 */
 	@Test
 	public void calculateColumnTotalForTwoValues() {
 		Mockery mockObject = new Mockery();
@@ -43,6 +47,11 @@ public class DataUtilitiesTest {
 
 	}
 
+	/***
+	 * This test will check calculateColumnTotal by using a 1 column, 2 row Values2D object.
+	 * This object only contains 0 values.
+	 * Expected output is 0
+	 */
 	@Test
 	public void calculateColumnTotalReturnsZeroForInvalidValue() {
 		Mockery mockObject = new Mockery();

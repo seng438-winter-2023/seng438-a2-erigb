@@ -17,18 +17,32 @@ public class RangeTest {
     }
 
 
+    /***
+     * This test will check that the getLength function returns the correct value.
+     * Expected output is 2
+     */
     @Test
     public void lengthShouldBeTwo() {
         assertEquals("The length of Range from -1 to 1 should be 2",
         		2, exampleRange.getLength(), .000000001d);
     }
     
+    /***
+     * This test will check that the contains function returns the correct value when the 
+     * given value is contained within the range.
+     * Expected output is True
+     */
     @Test
     public void containsShouldBeTrue() {
     	assertTrue("The Range does contain value 0.5. Contains should return true",
     	exampleRange.contains(0.5));
     }
     
+    /**
+     * This test will check that the contains function returns the correct value when the
+     * given value is not contained within the range.
+     * Expected output is False
+     */
     @Test
     public void containsShouldBeFalse() {
     	assertFalse("The Range does contain value 0.5. Contains should return true",
