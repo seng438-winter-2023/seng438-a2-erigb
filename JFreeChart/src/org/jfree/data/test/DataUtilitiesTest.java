@@ -141,10 +141,13 @@ public class DataUtilitiesTest {
 		assertEquals("The total for the row should be 0 with invalid values", 0, result, .000000001d);
 	}
 
+		// the following tests the method getCumulativePercentages in a case where data passed to it had only negative values
+	// since the documentation gives the range of percentages from 0.0-1.0
 	@Test
 	public void getCumulativePercentagesForAllPositiveDataObject() {
 		Mockery keyedMock = new Mockery();
 		keyedValuesList = keyedMock.mock(KeyedValues.class);
+		// the call to cumulative percentages uses the following getters multiple times depending on length on KeyedValues object
 		keyedMock.checking(new Expectations() {
 			{
 				atLeast(1).of(keyedValuesList).getItemCount();
@@ -185,33 +188,36 @@ public class DataUtilitiesTest {
 				resultValues.getValue(2).doubleValue(), .000000001d);
 	}
 
+	// the following tests the method getCumulativePercentages in a case where data passed to it had only negative values
+	// since the documentation gives the range of percentages from 0.0-1.0
 	@Test
 	public void getCumulativePercentagesForNegativeDataObject() {
 
 		Mockery negativeKeyedMock = new Mockery();
-		negativeValuesList = negativeKeyedMock.mock(KeyedValues.class);
+		keyedValuesList = negativeKeyedMock.mock(KeyedValues.class);
+		// the call to cumulative percentages uses the following getters multiple times depending on length on KeyedValues object
 		negativeKeyedMock.checking(new Expectations() {
 			{
-				atLeast(1).of(negativeValuesList).getItemCount();
+				atLeast(1).of(keyedValuesList).getItemCount();
 				will(returnValue(3));
 
-				atLeast(1).of(negativeValuesList).getValue(0);
+				atLeast(1).of(keyedValuesList).getValue(0);
 				will(returnValue(-5));
-				atLeast(1).of(negativeValuesList).getValue(1);
+				atLeast(1).of(keyedValuesList).getValue(1);
 				will(returnValue(-9));
-				atLeast(1).of(negativeValuesList).getValue(2);
+				atLeast(1).of(keyedValuesList).getValue(2);
 				will(returnValue(-2));
-				one(negativeValuesList).getKey(0);
+				one(keyedValuesList).getKey(0);
 				will(returnValue(1));
-				one(negativeValuesList).getKey(1);
+				one(keyedValuesList).getKey(1);
 				will(returnValue(2));
-				one(negativeValuesList).getKey(2);
+				one(keyedValuesList).getKey(2);
 				will(returnValue(15));
 
 			}
 		});
 
-		KeyedValues negativeResultValues = DataUtilities.getCumulativePercentages(negativeValuesList);
+		KeyedValues negativeResultValues = DataUtilities.getCumulativePercentages(keyedValuesList);
 		assertEquals("The key in index \"0\" is 1", 1, negativeResultValues.getKey(0));
 		assertEquals("The key in index \"1\" is 2", 2, negativeResultValues.getKey(1));
 		assertEquals("The key in index \"2\" is 15", 15, negativeResultValues.getKey(2));
@@ -220,6 +226,47 @@ public class DataUtilitiesTest {
 		assertEquals("The percentage for index \"1\" is |-5+-9/16| = 0.875 ", 0.875,
 				negativeResultValues.getValue(1).doubleValue(), .000000001d);
 		assertEquals("The percentage for index \"2\" is |-5+-9+-2/16| = 1.0", 1.0,
+				negativeResultValues.getValue(2).doubleValue(), .000000001d);
+	}
+	
+	// the following tests the method getCumulativePercentages in a case where data passed to it had both positive and negative values
+	// since the documentation gives the range of percentages from 0.0-1.0
+	@Test
+	public void getCumulativePercentagesForMixedDataObject() {
+
+		Mockery negativeKeyedMock = new Mockery();
+		keyedValuesList = negativeKeyedMock.mock(KeyedValues.class);
+		// the call to cumulative percentages uses the following getters multiple times depending on length on KeyedValues object
+		negativeKeyedMock.checking(new Expectations() {
+			{
+				atLeast(1).of(keyedValuesList).getItemCount();
+				will(returnValue(3));
+
+				atLeast(1).of(keyedValuesList).getValue(0);
+				will(returnValue(-5));
+				atLeast(1).of(keyedValuesList).getValue(1);
+				will(returnValue(9));
+				atLeast(1).of(keyedValuesList).getValue(2);
+				will(returnValue(-2));
+				one(keyedValuesList).getKey(0);
+				will(returnValue(1));
+				one(keyedValuesList).getKey(1);
+				will(returnValue(2));
+				one(keyedValuesList).getKey(2);
+				will(returnValue(15));
+
+			}
+		});
+
+		KeyedValues negativeResultValues = DataUtilities.getCumulativePercentages(keyedValuesList);
+		assertEquals("The key in index \"0\" is 1", 1, negativeResultValues.getKey(0));
+		assertEquals("The key in index \"1\" is 2", 2, negativeResultValues.getKey(1));
+		assertEquals("The key in index \"2\" is 15", 15, negativeResultValues.getKey(2));
+		assertEquals("The percentage for index \"0\" is |5|/16 = 0.3125", 0.3125,
+				negativeResultValues.getValue(0).doubleValue(), .000000001d);
+		assertEquals("The percentage for index \"1\" is |-5|+9/16 = 0.875 ", 0.875,
+				negativeResultValues.getValue(1).doubleValue(), .000000001d);
+		assertEquals("The percentage for index \"2\" is |-5|+9|-2|/16 = 1.0", 1.0,
 				negativeResultValues.getValue(2).doubleValue(), .000000001d);
 	}
 
