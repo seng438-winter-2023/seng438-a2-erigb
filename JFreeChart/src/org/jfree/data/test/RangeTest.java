@@ -1,6 +1,6 @@
 package org.jfree.data.test;
 
-import static org.junit.Assert.*; 
+import static org.junit.Assert.*;
 import org.jfree.data.Range; 
 import org.junit.*;
 
@@ -40,13 +40,24 @@ public class RangeTest {
     
     /**
      * This test will check that the contains function returns the correct value when the
-     * given value is not contained within the range.
+     * given value is lower than the lower bound of the range.
      * Expected output is False
      */
     @Test
-    public void containsShouldBeFalse() {
-    	assertFalse("The Range does contain value 0.5. Contains should return true",
+    public void containsShouldBeFalseWithLowerValue() {
+    	assertFalse("The Range does not contain value -7. Contains should return false",
     	exampleRange.contains(-7));
+    }
+    
+    /**
+     * This test will check that the contains function returns the correct value when the
+     * given value is higher than the upper bound of the range.
+     * Expected output is False
+     */
+    @Test
+    public void containsShouldBeFalseWithHigherValue() {
+    	assertFalse("The Range does not contain value 10. Contains should return false",
+    	exampleRange.contains(10));
     }
     
     /***
@@ -75,7 +86,7 @@ public class RangeTest {
 	 */
     @Test
     public void intersectsRangeFullyCoveredBySpecifiedRange() {
-    	assertTrue("The Range (-1, 1) intersects the current range (0, 1). Contains should return true",
+    	assertTrue("The Range (-1, 1) intersects the current range (-5, 5). Contains should return true",
     	exampleRange.intersects(-5, 5));
     }
     
@@ -142,19 +153,19 @@ public class RangeTest {
     @Test
     public void expandToIncludeOutsideUpperRange() {
     	Range actual = Range.expandToInclude(exampleRange, 1.5);
-    	assertEquals("The upper bound should be [-1, 1.01].",
-    			1.01, actual.getUpperBound(), .000000001d);
-    	assertEquals("The lower bound should be [-1, 1.01].",
+    	assertEquals("The upper bound should be 1.5.",
+    			1.5, actual.getUpperBound(), .000000001d);
+    	assertEquals("The lower bound should be -1.",
     			-1, actual.getLowerBound(), .000000001d);
     }
     
     @Test
     public void expandToIncludeOutsideLowerRange() {
     	Range actual = Range.expandToInclude(exampleRange, -1.5);
-    	assertEquals("The upper bound should be [-1.01, 1].",
+    	assertEquals("The upper bound should be 1.",
     			1, actual.getUpperBound(), .000000001d);
-    	assertEquals("The lower bound should be [-1.01, 1].",
-    			-1.01, actual.getLowerBound(), .000000001d);
+    	assertEquals("The lower bound should be -1.5.",
+    			-1.5, actual.getLowerBound(), .000000001d);
     }
 
     @After
