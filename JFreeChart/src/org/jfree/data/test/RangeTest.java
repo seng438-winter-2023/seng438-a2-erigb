@@ -110,6 +110,10 @@ public class RangeTest {
     	exampleRange.intersects(2, 3));
     }
     
+    /***
+	 * This test will test shifting a range with a positve value for delta that is small enough so as not to move -1 beyond 0
+	 * Expected output is a new range from (-0.5, 1.5).
+	 */
     @Test
     public void shiftRangeWithoutZeroCrossingPositveDelta() {
     	Range afterShift = Range.shift(exampleRange, 0.5);
@@ -120,6 +124,10 @@ public class RangeTest {
     	        1.5, afterShift.getUpperBound(), .000000001d);
     }
     
+     /***
+	 * This test will test shifting a range with a negative value for delta that is small enough so as not to move 1 beyond 0
+	 * Expected output is a new range from (-1.5, 0.5).
+	 */
     @Test
     public void shiftRangeWithoutZeroCrossingNegativeDelta() {
     	Range afterShift = Range.shift(exampleRange, -0.5);
@@ -131,6 +139,11 @@ public class RangeTest {
     	
     }
 
+    /***
+	 * This test will test shifting a range with a value for delta that is big enough so that it moves -1 beyond 0
+         * based on the documentation no zero crossing is allowed so -1 would be shifted to 0
+	 * Expected output is a new range from (0, 6).
+	 */
     @Test
     public void shiftShouldNotAllowZeroCrossing() {
         Range afterShift = Range.shift(exampleRange, 5.0);

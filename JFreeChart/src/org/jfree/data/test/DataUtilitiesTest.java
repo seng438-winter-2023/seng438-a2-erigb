@@ -150,7 +150,7 @@ public class DataUtilitiesTest {
 		assertEquals("The total for the row should be 0 with invalid values", 0, result, .000000001d);
 	}
 
-		// the following tests the method getCumulativePercentages in a case where data passed to it had only negative values
+	// the following tests the method getCumulativePercentages in a case where data passed to it had only positive values
 	// since the documentation gives the range of percentages from 0.0-1.0
 	@Test
 	public void getCumulativePercentagesForAllPositiveDataObject() {
