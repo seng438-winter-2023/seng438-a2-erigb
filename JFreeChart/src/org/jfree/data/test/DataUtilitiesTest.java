@@ -66,7 +66,7 @@ public class DataUtilitiesTest {
 				will(returnValue(0));
 			}
 		});
-		double result = DataUtilities.calculateColumnTotal(values, 10);
+		double result = DataUtilities.calculateColumnTotal(values, 0);
 		assertEquals(0, result, .000000001d);
 	}
 
