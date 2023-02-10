@@ -2,6 +2,8 @@ package org.jfree.data.test;
 
 import static org.junit.Assert.*;
 
+import java.security.InvalidParameterException;
+
 import org.jfree.data.DataUtilities;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.Values2D;
@@ -335,7 +337,7 @@ public class DataUtilitiesTest {
 			DataUtilities.createNumberArray2D(null);
 			fail("An exception should be thrown!");
 		} catch (Exception exception) {
-			assertEquals("The exception thrown type is IllegalArgumentException", IllegalArgumentException.class,
+			assertEquals("The exception thrown type is InvalidParameterException", InvalidParameterException.class,
 					exception.getClass());
 		}
 	}
