@@ -154,6 +154,9 @@ public class RangeTest {
 
     }
     
+        /* This test will test the method expandtoInclude where we are passing in a range and the value that must be included.
+         * Expected output should be a range that spans over the input range and has been expanded to included the input value.
+	 */
     @Test
     public void expandToIncludeWithinRange() {
     	Range actual = Range.expandToInclude(exampleRange, 0.8);
@@ -163,6 +166,9 @@ public class RangeTest {
     			-1, actual.getLowerBound(), .000000001d);
     }
     
+        /* This test will test the method expandtoInclude where we are passing in a range and the values that must be included.
+         * Expected output should be a range that spans over the input range and expands the upper bound to included the input value.
+	 */
     @Test
     public void expandToIncludeOutsideUpperRange() {
     	Range actual = Range.expandToInclude(exampleRange, 1.5);
@@ -172,6 +178,9 @@ public class RangeTest {
     			-1, actual.getLowerBound(), .000000001d);
     }
     
+        /* This test will test the method expandtoInclude where we are passing in a range and the values that must be included.
+         * Expected output should be a range that spans over the input range and expands the lower bound to included the input value.
+	 */
     @Test
     public void expandToIncludeOutsideLowerRange() {
     	Range actual = Range.expandToInclude(exampleRange, -1.5);

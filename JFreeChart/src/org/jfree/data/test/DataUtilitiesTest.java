@@ -279,6 +279,9 @@ public class DataUtilitiesTest {
 				negativeResultValues.getValue(2).doubleValue(), .000000001d);
 	}
 
+	/* This test will test the method createNumberArray where we are passing in Null arguments which is not permitted
+	 * An exception should be thrown
+	 */
 	@Test
 	public void createNumberArrayWithNullInput() {
 		try {
@@ -290,6 +293,9 @@ public class DataUtilitiesTest {
 		}
 	}
 
+	/* This test will test the method createNumberArray where we are passing in no arguments (empty)
+	 * Expected output should also be empty similar to the input
+	 */
 	@Test
 	public void createNumberArrayThatIsEmpty() {
 		Number[] expectedResult = {};
@@ -298,6 +304,9 @@ public class DataUtilitiesTest {
 		assertArrayEquals("The result should be", expectedResult, actualResult);
 	}
 
+	/* This test will test the method createNumberArray where we are passing in positive arguments
+	 * Expected output should be the input array, {1.1, 5.5, 8.6}
+	 */
 	@Test
 	public void createNumberArrayWithPositive() {
 		Number[] expectedResult = { 1.1, 5.5, 8.6 };
@@ -306,6 +315,9 @@ public class DataUtilitiesTest {
 		assertArrayEquals("The result should be", expectedResult, actualResult);
 	}
 
+	/* This test will test the method createNumberArray where we are passing in negative arguments
+	 * Expected output should be the input array, {-1.1, -5.5, -8.6}
+	 */
 	@Test
 	public void createNumberArrayWithNegative() {
 		Number[] expectedResult = { -1.1, -5.5, -8.6 };
@@ -314,6 +326,9 @@ public class DataUtilitiesTest {
 		assertArrayEquals("The array should be", expectedResult, actualResult);
 	}
 
+	/* This test will test the method createNumberArray2D where we are passing in Null arguments which is not permitted
+	 * An exception should be thrown
+	 */
 	@Test
 	public void createNumberArray2DWithNullInput() {
 		try {
@@ -325,6 +340,9 @@ public class DataUtilitiesTest {
 		}
 	}
 
+	/* This test will test the method createNumberArray2D where we are passing in no arguments (empty)
+	 * Expected output should also be empty similar to the input
+	 */
 	@Test
 	public void createNumberArray2DThatIsEmpty() {
 		Number[][] expectedResult = { {}, {} };
@@ -333,6 +351,9 @@ public class DataUtilitiesTest {
 		assertArrayEquals("The array should be", expectedResult, actualResult);
 	}
 
+	/* This test will test the method createNumberArray2D where we are passing in positive values for the second argument and the first argument is empty
+	 * Expected output should be the input array, {{}, {1.1, 5.5}}
+	 */
 	@Test
 	public void createNumberArray2DThatFirstArrayIsEmpty() {
 		Number[][] expectedResult = { {}, { 1.1, 5.5 } };
@@ -341,6 +362,9 @@ public class DataUtilitiesTest {
 		assertArrayEquals("The array should be", expectedResult, actualResult);
 	}
 
+	/* This test will test the method createNumberArray2D where we are passing in positive values for the first argument and the second argument is empty
+	 * Expected output should be the input array, {{1.1, 5.5}, {}}
+	 */
 	@Test
 	public void createNumberArray2DThatSecondArrayIsEmpty() {
 		Number[][] expectedResult = { { 1.1, 5.5 }, {} };
